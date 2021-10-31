@@ -113,7 +113,7 @@ async function run() {
 
         // Get Bookings by User Id
         app.get('/bookings/:userid', async(req, res) => {
-            const query = { user_id: parseInt(req.params.userid) };
+            const query = { user_id: req.params.userid };
 
             const bookings = await bookingsCollection.find(query);
 
