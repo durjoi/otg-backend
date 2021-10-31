@@ -130,22 +130,44 @@ async function run() {
             res.send(result.insertedId);
         });
 
-        // delete Event by id
+        // delete Booking by id
         app.delete('/bookings/:id', async(req, res) => {
 
             const id = ObjectId(req.params.id);
 
             const query = { _id: id };
 
-            const events = await bookingsCollection.deleteOne(query);
+            const booking = await bookingsCollection.deleteOne(query);
 
-            if (events.deletedCount === 1) {
+            if (booking.deletedCount === 1) {
                 console.log("Successfully deleted one document.");
             } else {
                 console.log("No documents matched the query. Deleted 0 documents.");
             }
 
             res.send("Deleted Successfully");
+
+        });
+
+        // Update status by id
+        app.put('/bookings/:id', async(req, res) => {
+
+            const id = ObjectId(req.params.id);
+
+            const query = { _id: id };
+
+            // create a document that sets the plot of the movie
+            const updateDoc = {
+                $set: {
+                    status: "Confirmed"
+                },
+            };
+
+            const booking = await bookingsCollection.updateOne(query, updateDoc);
+
+
+
+            res.send("Updated Successfully");
 
         });
 
