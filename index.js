@@ -73,6 +73,26 @@ async function run() {
 
         });
 
+
+        // delete Event by id
+        app.delete('/events/:id', async(req, res) => {
+
+            const id = ObjectId(req.params.id);
+
+            const query = { _id: id };
+
+            const events = await eventsCollection.deleteOne(query);
+
+            if (events.deletedCount === 1) {
+                console.log("Successfully deleted one document.");
+            } else {
+                console.log("No documents matched the query. Deleted 0 documents.");
+            }
+
+            res.send("Deleted Successfully");
+
+        });
+
         // Insert an Event
         app.post('/events', async(req, res) => {
             const newEvent = req.body;
@@ -108,6 +128,25 @@ async function run() {
             console.log(`A document was inserted in Booking Collection with the _id: ${result.insertedId}`);
 
             res.send(result.insertedId);
+        });
+
+        // delete Event by id
+        app.delete('/bookings/:id', async(req, res) => {
+
+            const id = ObjectId(req.params.id);
+
+            const query = { _id: id };
+
+            const events = await bookingsCollection.deleteOne(query);
+
+            if (events.deletedCount === 1) {
+                console.log("Successfully deleted one document.");
+            } else {
+                console.log("No documents matched the query. Deleted 0 documents.");
+            }
+
+            res.send("Deleted Successfully");
+
         });
 
 
