@@ -159,7 +159,7 @@ async function run() {
             // create a document that sets the plot of the movie
             const updateDoc = {
                 $set: {
-                    status: "Confirmed"
+                    status: "Approved"
                 },
             };
 
